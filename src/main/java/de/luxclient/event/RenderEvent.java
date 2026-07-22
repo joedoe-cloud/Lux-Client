@@ -2,9 +2,15 @@ package de.luxclient.event;
 
 
 /**
- * Event für Rendering.
+ * Rendering Event.
  *
- * Wird später vom HUD und der GUI verwendet.
+ * Wird später für:
+ *
+ * - HUD
+ * - ClickGUI
+ * - Overlay Rendering
+ *
+ * verwendet.
  */
 public class RenderEvent extends Event {
 
@@ -13,7 +19,9 @@ public class RenderEvent extends Event {
 
 
 
-    public RenderEvent(float tickDelta) {
+    public RenderEvent(
+            float tickDelta
+    ) {
 
         this.tickDelta = tickDelta;
     }
