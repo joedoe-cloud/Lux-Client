@@ -8,7 +8,9 @@ import java.util.List;
 /**
  * Zentrale Verwaltung aller Lux Module.
  *
- * Die GUI greift ausschließlich hierauf zu.
+ * Die GUI greift nur auf diesen Manager zu.
+ *
+ * Neue Module werden hier registriert.
  */
 public final class ModuleManager {
 
@@ -22,6 +24,7 @@ public final class ModuleManager {
     }
 
 
+
     /**
      * Initialisiert alle Module.
      */
@@ -31,12 +34,25 @@ public final class ModuleManager {
         MODULES.clear();
 
 
+        registerModules();
+    }
+
+
+
+    /**
+     * Registrierung aller Client Module.
+     */
+    private static void registerModules() {
+
+
         /*
          *
-         * Beispiel:
+         * Phase 3 Module:
          *
-         * register(new Sprint());
-         * register(new FullBright());
+         * register(new AutoClicker());
+         * register(new ClickGUI());
+         * register(new Keystrokes());
+         * register(new CPSDisplay());
          *
          */
     }
@@ -44,7 +60,7 @@ public final class ModuleManager {
 
 
     /**
-     * Modul registrieren.
+     * Modul hinzufügen.
      */
     public static void register(
             Module module
@@ -79,10 +95,12 @@ public final class ModuleManager {
                 new ArrayList<>();
 
 
-        for (Module module : MODULES) {
+        for(Module module : MODULES) {
 
 
-            if (module.getCategory() == category) {
+            if(module.getCategory()
+                    == category) {
+
 
                 result.add(module);
             }
@@ -95,18 +113,19 @@ public final class ModuleManager {
 
 
     /**
-     * Suche über Namen.
+     * Modul nach Namen suchen.
      */
     public static Module getModule(
             String name
     ) {
 
 
-        for (Module module : MODULES) {
+        for(Module module : MODULES) {
 
 
-            if (module.getName()
+            if(module.getName()
                     .equalsIgnoreCase(name)) {
+
 
                 return module;
             }
