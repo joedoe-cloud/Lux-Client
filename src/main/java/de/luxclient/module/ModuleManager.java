@@ -4,76 +4,125 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 /**
- * Verwaltet alle Module.
+ * Zentrale Verwaltung aller Lux Module.
+ *
+ * Die GUI greift ausschließlich hierauf zu.
  */
 public final class ModuleManager {
 
-    private static final List<Module> MODULES = new ArrayList<>();
+
+    private static final List<Module> MODULES =
+            new ArrayList<>();
+
 
     private ModuleManager() {
+
     }
 
+
     /**
-     * Wird später beim Clientstart aufgerufen.
+     * Initialisiert alle Module.
      */
     public static void initialize() {
 
+
         MODULES.clear();
 
+
         /*
-         * Module werden später hier registriert.
          *
          * Beispiel:
          *
          * register(new Sprint());
          * register(new FullBright());
+         *
          */
     }
 
+
+
     /**
-     * Registriert ein Modul.
+     * Modul registrieren.
      */
-    public static void register(Module module) {
+    public static void register(
+            Module module
+    ) {
+
         MODULES.add(module);
     }
+
+
 
     /**
      * Alle Module.
      */
     public static List<Module> getModules() {
-        return Collections.unmodifiableList(MODULES);
+
+        return Collections.unmodifiableList(
+                MODULES
+        );
     }
 
-    /**
-     * Alle Module einer Kategorie.
-     */
-    public static List<Module> getModules(Category category) {
 
-        List<Module> modules = new ArrayList<>();
+
+    /**
+     * Module einer Kategorie.
+     */
+    public static List<Module> getModules(
+            Category category
+    ) {
+
+
+        List<Module> result =
+                new ArrayList<>();
+
 
         for (Module module : MODULES) {
 
+
             if (module.getCategory() == category) {
-                modules.add(module);
+
+                result.add(module);
             }
         }
 
-        return modules;
+
+        return result;
     }
 
+
+
     /**
-     * Modul anhand des Namens suchen.
+     * Suche über Namen.
      */
-    public static Module getModule(String name) {
+    public static Module getModule(
+            String name
+    ) {
+
 
         for (Module module : MODULES) {
 
-            if (module.getName().equalsIgnoreCase(name)) {
+
+            if (module.getName()
+                    .equalsIgnoreCase(name)) {
+
                 return module;
             }
         }
 
+
         return null;
+    }
+
+
+
+    /**
+     * Entfernt alle Module.
+     */
+    public static void clear() {
+
+        MODULES.clear();
     }
 }
