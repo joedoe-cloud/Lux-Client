@@ -1,1 +1,4 @@
-
+{
+  "name": "Lux Client Development",
+  "image": "mcr.microsoft.com/devcontainers/java:21"
+}
