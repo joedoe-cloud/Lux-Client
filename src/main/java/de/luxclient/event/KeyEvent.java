@@ -2,9 +2,9 @@ package de.luxclient.event;
 
 
 /**
- * Event für Tastendrücke.
+ * Tastatur Event.
  *
- * Wird später vom KeybindManager benutzt.
+ * Wird vom KeybindManager verarbeitet.
  */
 public class KeyEvent extends Event {
 
@@ -13,7 +13,9 @@ public class KeyEvent extends Event {
 
 
 
-    public KeyEvent(int key) {
+    public KeyEvent(
+            int key
+    ) {
 
         this.key = key;
     }
