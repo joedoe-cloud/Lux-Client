@@ -2,16 +2,12 @@ package de.luxclient.setting;
 
 
 /**
- * Basisklasse für alle Settings.
+ * Basis aller Modul-Einstellungen.
  *
- * Jede Einstellung im Client erbt hiervon.
+ * Settings enthalten nur Daten.
  *
- * Beispiele:
- * - BooleanSetting
- * - NumberSetting
- * - RangeSetting
- * - ModeSetting
- * - KeybindSetting
+ * Die GUI entscheidet später selbst,
+ * wie diese dargestellt werden.
  */
 public abstract class Setting<T> {
 
@@ -23,9 +19,13 @@ public abstract class Setting<T> {
 
 
 
-    protected Setting(String name, T value) {
+    protected Setting(
+            String name,
+            T value
+    ) {
 
         this.name = name;
+
         this.value = value;
     }
 
@@ -45,7 +45,9 @@ public abstract class Setting<T> {
 
 
 
-    public void setValue(T value) {
+    public void setValue(
+            T value
+    ) {
 
         this.value = value;
     }
