@@ -6,107 +6,160 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 /**
- * Basisklasse aller Module.
+ * Basisklasse aller Lux Client Module.
  *
- * Jedes zukünftige Modul erbt hiervon.
+ * Jedes Modul besitzt:
+ *
+ * - Name
+ * - Beschreibung
+ * - Kategorie
+ * - Aktivierungsstatus
+ * - Settings
+ *
+ * Keybinds werden NICHT als Setting gespeichert.
+ *
+ * Die Verwaltung erfolgt später zentral
+ * über den KeybindManager.
  */
 public abstract class Module {
 
+
     private final String name;
+
     private final String description;
+
     private final Category category;
 
+
     private boolean enabled;
-    private int keybind = -1;
 
-    private final List<Setting<?>> settings = new ArrayList<>();
 
-    protected Module(String name,
-                     String description,
-                     Category category) {
+    private final List<Setting<?>> settings =
+            new ArrayList<>();
+
+
+    protected Module(
+            String name,
+            String description,
+            Category category
+    ) {
 
         this.name = name;
+
         this.description = description;
+
         this.category = category;
     }
 
-    /**
-     * Wird beim Aktivieren aufgerufen.
-     */
-    public void onEnable() {
-    }
 
     /**
-     * Wird beim Deaktivieren aufgerufen.
+     * Wird beim Aktivieren ausgeführt.
      */
-    public void onDisable() {
+    protected void onEnable() {
+
     }
+
 
     /**
-     * Tick Event.
+     * Wird beim Deaktivieren ausgeführt.
      */
-    public void onUpdate() {
+    protected void onDisable() {
+
     }
 
+
+    /**
+     * Wird jeden Client Tick ausgeführt.
+     */
+    protected void onUpdate() {
+
+    }
+
+
+    /**
+     * Wird beim Rendering ausgeführt.
+     */
+    protected void onRender(float tickDelta) {
+
+    }
+
+
+    /**
+     * Aktiviert oder deaktiviert das Modul.
+     */
     public final void toggle() {
 
-        enabled = !enabled;
-
-        if (enabled) {
-            onEnable();
-        } else {
-            onDisable();
-        }
+        setEnabled(!enabled);
     }
+
 
     public final void setEnabled(boolean enabled) {
 
+
         if (this.enabled == enabled) {
+
             return;
         }
 
+
         this.enabled = enabled;
 
+
         if (enabled) {
+
             onEnable();
+
         } else {
+
             onDisable();
         }
     }
 
+
     /**
-     * Fügt ein Setting hinzu.
+     * Fügt ein GUI-kompatibles Setting hinzu.
      */
-    protected void addSetting(Setting<?> setting) {
+    protected final void addSetting(
+            Setting<?> setting
+    ) {
+
         settings.add(setting);
     }
 
-    public List<Setting<?>> getSettings() {
+
+    /**
+     * Gibt alle Settings zurück.
+     *
+     * Die GUI liest ausschließlich diese Liste.
+     */
+    public final List<Setting<?>> getSettings() {
+
         return Collections.unmodifiableList(settings);
     }
 
+
     public String getName() {
+
         return name;
     }
 
+
     public String getDescription() {
+
         return description;
     }
 
+
     public Category getCategory() {
+
         return category;
     }
 
+
     public boolean isEnabled() {
+
         return enabled;
-    }
-
-    public int getKeybind() {
-        return keybind;
-    }
-
-    public void setKeybind(int keybind) {
-        this.keybind = keybind;
     }
 }
