@@ -2,14 +2,15 @@ package de.luxclient.setting;
 
 
 /**
- * Ein einfaches ON/OFF Setting.
+ * Einfacher AN/AUS Wert.
  *
  * Beispiel:
  *
- * AutoSprint:
- * true / false
+ * Sprint
+ * AutoJump
  */
 public class BooleanSetting extends Setting<Boolean> {
+
 
 
     public BooleanSetting(
@@ -25,5 +26,12 @@ public class BooleanSetting extends Setting<Boolean> {
     public void toggle() {
 
         setValue(!getValue());
+    }
+
+
+
+    public boolean isEnabled() {
+
+        return getValue();
     }
 }
