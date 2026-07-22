@@ -2,27 +2,40 @@ package de.luxclient.event;
 
 
 /**
- * Basis-Klasse aller Events.
+ * Basis aller Lux Client Events.
  *
- * Alle Events im Client erben davon.
+ * Events können:
  *
- * Beispiele:
- * - TickEvent
- * - RenderEvent
- * - KeyEvent
+ * - Tick
+ * - Render
+ * - Key Input
+ * - weitere Client Events
+ *
+ * darstellen.
  */
 public abstract class Event {
+
 
     private boolean cancelled;
 
 
+
+    /**
+     * Prüft, ob Event blockiert wurde.
+     */
     public boolean isCancelled() {
 
         return cancelled;
     }
 
 
-    public void setCancelled(boolean cancelled) {
+
+    /**
+     * Setzt Cancel Status.
+     */
+    public void setCancelled(
+            boolean cancelled
+    ) {
 
         this.cancelled = cancelled;
     }
