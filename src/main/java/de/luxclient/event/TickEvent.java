@@ -2,9 +2,9 @@ package de.luxclient.event;
 
 
 /**
- * Wird regelmäßig während des Minecraft-Ticks ausgelöst.
+ * Wird während des Minecraft Tick-Zyklus ausgelöst.
  *
- * 20 Ticks pro Sekunde.
+ * Minecraft läuft standardmäßig mit 20 TPS.
  */
 public class TickEvent extends Event {
 
@@ -12,15 +12,19 @@ public class TickEvent extends Event {
     public enum Stage {
 
         PRE,
+
         POST
     }
+
 
 
     private final Stage stage;
 
 
 
-    public TickEvent(Stage stage) {
+    public TickEvent(
+            Stage stage
+    ) {
 
         this.stage = stage;
     }
