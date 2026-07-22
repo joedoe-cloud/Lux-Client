@@ -1,6 +1,7 @@
 package de.luxclient.setting;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -29,42 +30,59 @@ public class ModeSetting extends Setting<String> {
 
         super(name, defaultMode);
 
-        this.modes = Arrays.asList(modes);
+
+        this.modes =
+                Arrays.asList(modes);
+
+
+        if(!this.modes.contains(defaultMode)
+                && !this.modes.isEmpty()) {
+
+            setValue(
+                    this.modes.get(0)
+            );
+        }
     }
 
 
 
     public List<String> getModes() {
 
-        return modes;
+        return Collections.unmodifiableList(
+                modes
+        );
     }
 
 
 
     public void cycle() {
 
-        int current =
-                modes.indexOf(getValue());
+
+        int index =
+                modes.indexOf(
+                        getValue()
+                );
 
 
-        int next =
-                current + 1;
+        index++;
 
 
-        if (next >= modes.size()) {
+        if(index >= modes.size()) {
 
-            next = 0;
+            index = 0;
         }
 
 
         setValue(
-                modes.get(next)
+                modes.get(index)
         );
     }
 
 
 
-    public boolean is(String mode) {
+    public boolean is(
+            String mode
+    ) {
 
         return getValue()
                 .equalsIgnoreCase(mode);
