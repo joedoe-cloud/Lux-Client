@@ -1,5 +1,6 @@
 package de.luxclient;
 
+import de.luxclient.module.ModuleManager;
 
 import net.fabricmc.api.ClientModInitializer;
 import org.slf4j.Logger;
@@ -31,14 +32,23 @@ public class LuxClient implements ClientModInitializer {
 
 
     @Override
-    public void onInitializeClient() {
+public void onInitializeClient() {
 
 
-        LOGGER.info(
-                "{} {} initialized.",
-                NAME,
-                VERSION
-        );
+    LOGGER.info(
+            "{} {} initialized.",
+            NAME,
+            VERSION
+    );
+
+
+    ModuleManager.initialize();
+
+
+    LOGGER.info(
+            "Managers initialized."
+    );
+}
 
 
         /*
