@@ -6,8 +6,9 @@ package de.luxclient.setting;
  *
  * Beispiel:
  *
- * FOV:
- * 90
+ * FOV
+ * Reichweite
+ * Geschwindigkeit
  */
 public class NumberSetting extends Setting<Double> {
 
@@ -30,30 +31,67 @@ public class NumberSetting extends Setting<Double> {
 
         super(name, value);
 
+
         this.minimum = minimum;
+
         this.maximum = maximum;
+
         this.increment = increment;
+
+
+        setValue(value);
     }
 
 
 
     @Override
-    public void setValue(Double value) {
+    public void setValue(
+            Double value
+    ) {
 
 
-        if (value < minimum) {
+        if (value == null) {
 
-            value = minimum;
+            return;
         }
 
 
-        if (value > maximum) {
-
-            value = maximum;
-        }
+        value = clamp(value);
 
 
-        super.setValue(value);
+        super.setValue(
+                round(value)
+        );
+    }
+
+
+
+    private double clamp(
+            double value
+    ) {
+
+        return Math.max(
+                minimum,
+                Math.min(
+                        maximum,
+                        value
+                )
+        );
+    }
+
+
+
+    private double round(
+            double value
+    ) {
+
+        double steps =
+                Math.round(
+                        value / increment
+                );
+
+
+        return steps * increment;
     }
 
 
@@ -64,10 +102,12 @@ public class NumberSetting extends Setting<Double> {
     }
 
 
+
     public double getMaximum() {
 
         return maximum;
     }
+
 
 
     public double getIncrement() {
