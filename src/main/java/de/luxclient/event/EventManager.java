@@ -6,9 +6,16 @@ import java.util.function.Consumer;
 
 
 /**
- * Einfacher Event-Verteiler.
+ * Zentraler Event-Verteiler.
  *
- * Verteilt Events an registrierte Listener.
+ * Alle Systeme können Events registrieren.
+ *
+ * Beispiel:
+ *
+ * Module
+ * HUD
+ * KeybindManager
+ * GUI
  */
 public final class EventManager {
 
@@ -17,21 +24,31 @@ public final class EventManager {
             new ArrayList<>();
 
 
+
     private EventManager() {
 
     }
 
 
 
+    /**
+     * Listener registrieren.
+     */
     public static void register(
             Consumer<Event> listener
     ) {
 
-        LISTENERS.add(listener);
+        if (!LISTENERS.contains(listener)) {
+
+            LISTENERS.add(listener);
+        }
     }
 
 
 
+    /**
+     * Listener entfernen.
+     */
     public static void unregister(
             Consumer<Event> listener
     ) {
@@ -41,12 +58,35 @@ public final class EventManager {
 
 
 
-    public static void call(Event event) {
+    /**
+     * Event senden.
+     */
+    public static void call(
+            Event event
+    ) {
 
 
-        for (Consumer<Event> listener : LISTENERS) {
+        for (Consumer<Event> listener :
+                new ArrayList<>(LISTENERS)) {
+
 
             listener.accept(event);
+
+
+            if (event.isCancelled()) {
+
+                break;
+            }
         }
+    }
+
+
+
+    /**
+     * Alle Listener entfernen.
+     */
+    public static void clear() {
+
+        LISTENERS.clear();
     }
 }
