@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+
+  "id": "luxclient",
+
+  "version": "${version}",
+
+  "name": "Lux Client",
+
+  "description": "Lux Client v1 - Premium modular Fabric PvP client.",
+
+  "authors": [
+    "Lux Development"
+  ],
+
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "Private",
+
+  "environment": "client",
+
+  "entrypoints": {
+
+    "client": [
+      "de.luxclient.LuxClient"
+    ]
+  },
+
+
+  "depends": {
+
+    "fabricloader": ">=0.16.0",
+
+    "minecraft": "~1.21.10",
+
+    "fabric-api": "*"
+  },
+
+
+  "suggests": {
+
+  }
+}
