@@ -1,28 +1,42 @@
 package de.luxclient.module;
 
 /**
- * Kategorien für Module.
- * Diese werden später automatisch in der Sidebar
- * der ClickGUI angezeigt.
+ * Kategorien für Lux Client Module.
+ *
+ * Diese Enum wird später automatisch von der GUI
+ * für die Sidebar verwendet.
+ *
+ * Neue Kategorien müssen nur hier ergänzt werden.
  */
 public enum Category {
 
     COMBAT("Combat"),
+
+    MACE("Mace"),
+
+    MISC("Misc"),
+
     MOVEMENT("Movement"),
-    PLAYER("Player"),
-    RENDER("Render"),
-    MISC("Misc");
+
+    SPEAR("Spear"),
+
+    VISUAL("Visual");
+
 
     private final String displayName;
 
+
     Category(String displayName) {
+
         this.displayName = displayName;
     }
 
+
     /**
-     * Anzeigename für die GUI.
+     * Anzeigename für GUI.
      */
     public String getDisplayName() {
+
         return displayName;
     }
 }
